@@ -35,7 +35,7 @@ jobs:
           EBAY_CLIENT_SECRET: ${{ secrets.EBAY_CLIENT_SECRET }}
         run: python collect_ebay.py
 
-      - name: Archive and save snapshots
+      - name: Archive snapshots
         if: always()
         run: |
           python - <<'PY'
@@ -53,12 +53,21 @@ jobs:
                       folder,
                   )
           PY
-          
-          python build_tables.py
-          
+
+      - name: Build tables
+        if: always()
+        run: python build_tables.py
+
+      - name: Save snapshots and tables
+        if: always()
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add snapshots/ tables/
+          for directory in snapshots tables; do
+            if [ -d "$directory" ]; then
+              git add "$directory/"
+            fi
+          done
           if ! git diff --cached --quiet; then
             git commit -m "Save eBay snapshot"
             git pull --rebase
