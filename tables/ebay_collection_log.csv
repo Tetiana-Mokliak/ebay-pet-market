@@ -1,0 +1,7 @@
+﻿snapshot_id,snapshot_date,search_name,query,snapshot_status,search_status,pages_read,raw_records,unique_item_ids,duplicate_records,last_reported_total
+2026-10-08T16:36:49.436181+00:00,2026-10-08,feeders,automatic cat feeder,completed,completed,7,1227,1224,3,1227
+2026-10-08T16:36:49.436181+00:00,2026-10-08,fountains,cat water fountain,completed,completed,30,6000,5960,40,5887
+2026-10-09T13:23:35.155071+00:00,2026-10-09,feeders,automatic cat feeder,completed,completed,7,1242,1237,5,1222
+2026-10-09T13:23:35.155071+00:00,2026-10-09,fountains,cat water fountain,completed,completed,30,6000,5975,25,5872
+2026-10-10T07:29:32.130776+00:00,2026-10-10,feeders,automatic cat feeder,completed,completed,7,1242,1221,21,1220
+2026-10-10T07:29:32.130776+00:00,2026-10-10,fountains,cat water fountain,completed,completed,30,6000,5677,323,5973
