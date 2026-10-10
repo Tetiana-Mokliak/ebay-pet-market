@@ -9,6 +9,7 @@ OUTPUT_DIR = Path("tables")
 
 HISTORY_FIELDS = [
     "snapshot_id", "snapshot_date", "collected_at",
+    "search_group",
     "item_id", "legacy_item_id", "title",
     "price", "currency",
     "seller_username", "seller_feedback_percentage",
@@ -179,6 +180,19 @@ def main():
                 })
 
         print(f"Read: {archive_path.name}", flush=True)
+
+    # Збираємо групи пошуку для кожного оголошення в кожному зборі.
+    groups = {}
+
+    for snapshot_id, search_name, item_id in search_results:
+        key = (snapshot_id, item_id)
+        groups.setdefault(key, set()).add(search_name)
+
+    for key, row in history.items():
+        names = groups[key]
+        row["search_group"] = (
+            "both" if len(names) > 1 else next(iter(names))
+        )
 
     # Записуємо CSV лише після успішного читання всіх архівів.
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
